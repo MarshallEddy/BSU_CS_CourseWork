@@ -1,0 +1,86 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1348\cocoasubrtf170
+{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;}
+\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\pardirnatural
+
+\f0\fs24 \cf0 Analysis of Algorithms\
+Marshall Eddy\
+CS 221-003\
+\
+\pard\pardeftab720\sb240\sa120\pardirnatural
+
+\b \cf0 Algorithm 1: Find\
+\pard\pardeftab720\sb200\sa120\pardirnatural
+\cf0 Section 1: Preliminary Analysis\
+\pard\pardeftab720\sl288\slmult1\sa140\pardirnatural
+
+\b0 \cf0 The find() method starts off with a for loop that initializes an int, increments that int, and there is a condition statement. There is also another conditional statement within the loop, and finally there is a return statement. This means even if the array only had one element, then this method will always execute a minimum of 5 statements when called.\
+T(n) = 5 + ?\
+If there is more than one element in the array, then the loop will execute n amount of times, n being the length of the array (number of elements). Overtime the loop runs, it will execute a conditional check, and then it will execute a return statement. The return happens regardless of the conditional since there is a second return outside the loop.  So I can safely say that the loop will execute 4n times because the return statement will only happen once at the end.\
+T(n) = 5 + 4n + ?\
+Since there are no more statements in the find() method, we can safely assume that the order will be predicted to be O(n).\
+T(n) = 4n+5\
+\
+\pard\pardeftab720\sb200\sa120\pardirnatural
+
+\b \cf0 Section 2: Collected Data\
+\pard\pardeftab720\sl288\slmult1\sa140\pardirnatural
+
+\b0 \cf0 size	 statements\
+1000	2015\
+10000	20217\
+20000  50156			\
+30000	93203\
+40000	150103\
+50000  220128\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural
+\cf0 \
+\pard\pardeftab720\sb200\sa120\pardirnatural
+
+\b \cf0 Section 3: Final Analysis\
+\pard\pardeftab720\sl288\slmult1\sa140\pardirnatural
+
+\b0 \cf0 I had initially thought that the growth would of just been a linear fit. However when I plotted the regression line as linear I got an R^2 of 0.95 which is a decent fit meaning it is 95% accurate with the data points. Once I plotted the quadratic regression, I was given an R^2 of 0.99995. Which is basically 1.0, meaning it basically was a perfect fit. I tested other regressions, such as a Polynomial of Order 4 (x^4) and actually got an R^2 of 1.0.  This was nice, but it looked too crazy and seemed unreasonable for what we are doing.\
+I would say my original prediction was not too far off since most of them are around the 4n+5 prediction and the number in front of the x^2 value on the regression is very small, so it is almost not a factor. A linear fit, is fairly accurate at 95% so I would not necessarily throw out my original prediction, it\'92s just in terms of the best fit possible, a quadratic is for sure the right way to go.\
+After reassessing the code, it makes sense that the linear fit was only partially accurate, and that the coefficient of the highest order is extremely small. The data grow quickly,  but not quick enough to completely rule out a linear fit. However, it is clear a 2nd order polynomial regressive fit is the best fit.\
+\
+\pard\pardeftab720\sb240\sa120\pardirnatural
+
+\b \cf0 Algorithm 2: Order\
+\pard\pardeftab720\sb200\sa120\pardirnatural
+\cf0 Section 1: Preliminary Analysis\
+\pard\pardeftab720\sl288\slmult1\sa140\pardirnatural
+
+\b0 \cf0 The method order() starts off with a for-loop,  and then inside the loop it initializes two variable while giving them both an assignment. Then it goes into a while-loop inside the for loop, which has to conditions to check, and then an assignment statement and a decrement statement. Then lastly, it has an assignment within the for-loop, after the while-loop. So, with only 1 element in the array, the loop will contribute 2 statements.\
+T(n) = 2 + ?\
+If there are more than one elements within the loop, then it will run n amount of times. there are 8 statements in the loop, assuming the while-loop condition does not work. so we can say the number of statements within the for-loop will be 8n.\
+T(n) = 2 + 8n + ?\
+Then we have the while-loop inside of the for loop which if it runs, it will have 4n number of statements due to the assignment statement and decrement inside the loop, and the checking the while-loop\'92s conditions, which it has two. Also, since the while-loop is nested in the for-loop, the number of times they are run will be multiplied together, instead of added.\
+T(n) = 2+8n*4n + ?\
+Now we can simplify the equation since there are no more statements left in the method.\
+T(n) = 32n^2 + 2\
+Now that we have simplified the equation we can see the order of this equation is O(n^2).\
+\pard\pardeftab720\sb200\sa120\pardirnatural
+
+\b \cf0 Section 2: Collected Data\
+\pard\pardeftab720\sl288\slmult1\sa140\pardirnatural
+
+\b0 \cf0 size	 statements\
+1000	1,050,110\
+10000	100,042,690\
+20000  400,771,162		\
+30000	899,630,338\
+40000	1,598,966,786\
+50000  2,502,073,834\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\pardirnatural
+\cf0 \
+\pard\pardeftab720\sb200\sa120\pardirnatural
+
+\b \cf0 Section 3: Final Analysis\
+\pard\pardeftab720\sl288\slmult1\sa140\pardirnatural
+
+\b0 \cf0 My prediction of the order being O(n^2) was accurate as the quadratic regression (line of best fit) was given an order of 2, and the R^2 was 1.00, meaning the line generated was 100% correct. However, my prediction only had the variable n^2 and no other n\'92s. This regression line uses n^2 and n, and the coefficients were vastly different in comparison.\
+Furthermore,  considering that when considering the efficiency of algorithms, we generally only care about the big O term, which in this case was O(n^2) which is the same as my prediction. So my assessment of the code was accurate.}

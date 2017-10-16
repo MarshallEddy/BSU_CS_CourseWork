@@ -1,0 +1,47 @@
+**************
+Marshall Eddy
+debugging H/W
+9/14/15
+**************
+name of failed test:
+where breakpoints:
+where was bug:
+how did I fix it?
+
+1) Empty Set
+	*My breakpoint was in the SetTester.java class on line 104
+	which is where it calls the emptySet() method.
+	*The bug was in ArraySet.java on line 39 in the return value
+	of the isEmpty() method.
+	*I fixed the bug by changing the return value of (rear > 0)
+	to (rear <= 0)
+	
+2) Empty Set add a
+	*MY breakpoint was in the SetTester.java class on line 140
+	which is where it calls the emptySet() method.
+	*The bug was in the add() method. It would add an element to
+	the set, but not increase the size(rear).
+	*I fixed the bug by adding the code rear++; to line 59 of
+	ArraySet.java after setArray[rear] = element;
+	
+3) A_addB_AB_testRemoveA
+	*My breakpoint was in the SetTester.java class on line 258
+	which is where it calls the testRemove() method, trying to
+	remove elementA.
+	*The bug was in the T remove() method. There was a while loop
+	on lines 73-76 that caused a indexOutOfBounds exception: 2.
+	*To fix the bug, I changed the while loop and made it into a 
+	for loop.
+	
+4) AB_remove_A_B_testContainsA
+	*My breakpoint was in the SetTester.java class on line 294
+	which is where is calls the testContains() method, trying to
+	test and see if element_A is in the set or not.
+	*The bug was in the for loop I had replace for the while loop
+	in the 3rd bug in lines 73-76 that caused the elements in
+	the set to be in the wrong place and thus removing the wrong
+	element.
+	*I fixed the bug by adding a new int j = 0 for the for-loop
+	instead of using the int i which was already there. Then I
+	set setArray[i] equal to setArray[j].
+	

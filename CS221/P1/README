@@ -1,0 +1,138 @@
+*******************
+* P1: Magic Square
+* CS 221
+* 9/7/15
+* Marshall Eddy
+******************* 
+
+OVERVIEW:
+
+ This program Creates a Magic Square in a file, and has
+ the ability to check if a matrix is a magic square or
+ not. The file given with the matrix and the parameters
+ for the matrix to be created are given in the form of
+ command line arguments.
+
+
+INCLUDED FILES:
+
+* MagicSquare.java - source file
+* MagicSquareTester.java - driver class (Tester)
+* README - this file
+
+
+COMPILING AND RUNNING:
+
+Open up the console and enter to the directory containing 
+the correct files. Then type in the following in order to
+compile and run this program.
+
+$ javac *.java
+$ java MagicSquareTester
+	This program requires you to give it command line arguments:
+	There are two flags: -check [filename]
+						 -create [filename] [size(odd int)]
+	EX: $ java MagicSquareTester -check myMagicSquare.txt
+		$ java MagicSquareTester -create myMagicSquare.txt 5				 
+ 
+ If done correctly you will either have a file with a magic square,
+ or the console will output a matrix and state if it is a magic square
+ or not.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+After all the global variables, then there is the checkMatrix() method.
+This method has several logic statements that check to make sure the matrix
+is a magic square. It first checks to make sure all the numbers from 1-n are
+in the matrix, then makes sure the rows, columns, and diagonals add up to
+the correct sum for the given size of the magic square. Then gives the 
+correct statement corresponding to whether or not the matrix is a magic 
+square. It also includes the readMatrix() method, which is right below it.
+This method reads the matrix and the nice of it from the given file.
+
+Then there is the createMagicSquare() method, which is used to create the
+magic square. All it has is the scanner that reads in the size of the 
+magic square from the command-line arguments. Then does the math and uses
+logic statements to place the numbers in the correct place in the matrix.
+This method then uses the writeMatrix() method to write the matrix into
+a file with a given file name. This method is right after (below) the 
+createMagicSquare() method.
+
+There are only two classes in this program: MagicSquare.java, and
+MagicSquareTester.java. MagicSquare.java is just the source code and
+the MagicSquareTester is the driver class used to test each different
+part/method of the MagicSquare class. 
+
+
+TESTING:
+
+I used the given files to make sure the program would correctly check
+for a magic square, and give a correct output. Then to test the create
+magic square aspect of the program I would use different file names and
+sizes and make sure it generated a file of the given name and a matrix
+of the correct size. Then after I was sure the checkMatrix() method worked
+I would use the file that created the magic square in the command line
+argument in the checkMAtrix() method. 
+
+I tried using too many and too less arguments to make sure its' output
+was relevant. Then I tried it with no arguments, invalid sizes, and 
+invalid files. This is everything I could think of that someone might
+accidentally enter in to the command line arguments. I asked my girlfriend
+and room-mate, whom are neither CS majors or taken any CS classes before, 
+to try and mess it up by typing in random command line arguments, and the 
+program accounted for it every time.
+
+
+Currently there are no known bugs in the program. I'm sure there is at
+least one bug or issue in this program, I just can not find it, or maybe
+I have just not tried enough examples to conclude there are 0 bugs/issues.
+
+
+DISCUSSION:
+ 
+ I started out by creating the method headers, and then I decided to
+ fill in each method, starting with the createMatrix() method. I filled
+ in all of them, then realized I needed to create the Tester so I could
+ actually know if the code I was writing would work. I finally got that 
+ done and tried to run the program in eclipse, and it just said, "Could
+ not find or locate main class MagicSquareTester. After googling and
+ asking for help I was still stuck. I then tried it in the console and it 
+ worked fine. I guess it was just eclipse. That was my only problem with
+ running the program. 
+ 
+ I had many troubles trying to figure out the logic for the checkMatrix()
+ method. I figured out how to add up the sum of every row because of how
+ I had the output print the matrix. But the columns and diagonals were
+ very difficult and time consuming for me. I went to the lab and got some
+ guidance, it still took me a while, but I finally realized I just had
+ to switch the rows and columns variables, like so: matrixN[i][j] to 
+ matrixN[j][i]. Then came the diagonals. I realized I just needed one 
+ variable for the row and column to get the left-right diagonal. Then
+ it made sense for me to do the same thing, but starting the for-loop
+ at n and decrementing to go from right-left.
+ 
+ My biggest trouble was probably trying to figure out how to write to a file.
+ I eventually gave up and just wanted to make sure my code and logic were 
+ correct my printing to the command line. Then I realized it would basically
+ be the same code as printing to the command line, but instead I just had
+ to use the PrintWriter object.println() method. Then i still did not know if
+ it was working, but I finally realized I was suppose to be giving it a
+ filename and size as parameters for the method. Then I could search for 
+ the file it created by using the file name that was given in the command
+ line arguments. Once I did, everything was working and all I had left
+ was to make sure I had all the exceptions covered, like the file not found 
+ or not having integers, or too many/less arguments. 
+ 
+ I finished off adding all the try/catches and other code to make sure
+ the program would catch all errors and act appropriately when they occur.
+ I think I covered everything, but there is a chance I have not, I might be
+ missing something simple, but as far as I can tell this program works
+ as it should specified by my instructor.
+ 
+ It was a fun and challenging program to write, I'm glad it was the first
+ project to start of the semester, because anything more difficult would have
+ been an issue after not coding all summer long!
+ 
+ 
+ 
