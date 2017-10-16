@@ -1,0 +1,303 @@
+LIST TESTING SCENARIOS
+
+starting state -> change -> resulting state
+
+For each scenario, the results of every method supported by the list (including Iterator methods) should be tested for full coverage.
+However, since implementing full coverage may require more time than available, you may not be able to exhaustively test every method in every scenario. If you have to eliminate some tests, focus on reducing tests that are unlikely to produce different results than a test you've already written. For example, you may choose to test toString() in only one scenario resulting in a 2-element list and only one scenario resulting in a 3-element list.
+ 
+Any List
+1) no list -> constructor -> []
+ 
+Unordered List:
+1) [] -> addToFront(A) -> [A]
+2) [] -> addToRear(A) -> [A]
+3) [A] -> removeFirst() -> []
+4) [A] -> removeLast() -> []
+5) [A] -> remove(A) -> []
+6) [A] -> addToFront(B) -> [B,A]
+7) [A] -> addToRear(B) -> [A,B]
+8) [A] -> addAfter(B,A) -> [A,B]
+9) [A,B] -> removeFirst() -> [B]
+10) [A,B] -> removeLast() -> [A]
+11) [A,B] -> remove(A) -> [B]
+12) [A,B] -> remove(B) -> [A]
+13) [A,B] -> addToFront(C) -> [C,A,B]
+14) [A,B] -> addToRear(C) -> [A,B,C]
+15) [A,B] -> addAfter(C,A) -> [A,C,B]
+16) [A,B] -> addAfter(C,B) -> [A,B,C]
+17) [A,B,C] -> removeFirst() -> [B,C]
+18) [A,B,C] -> removeLast() -> [A,B]
+19) [A,B,C] -> remove(A) -> [B,C]
+20) [A,B,C] -> remove(B) -> [A,C]
+21) [A,B,C] -> remove(C) -> [A,B]
+ 
+Indexed List:
+1) [] -> add(A) -> [A]
+2) [] -> add(0,A) -> [A]
+3) [A] -> remove(0) -> []
+4) [A] -> set(0,B) -> [B]
+5) [A] -> add(0,B) -> [B,A]
+6) [A] -> add[1,B) -> [A,B]
+7) [A,B] -> remove(0) -> [B]
+8) [A,B] -> remove(1) -> [A]
+9) [A,B] -> set(0,C) -> [C,B]
+10) [A,B] -> set(1,C) -> [A,C]
+11) [A,B] -> add(C) -> [A,B,C]
+12) [A,B] -> add(0,C) -> [C,A,B]
+13) [A,B] -> add(1,C) -> [A,C,B]
+14) [A,B] -> add (2,C) -> [A,B,C]
+15) [A,B,C] -> remove(0) -> [B,C]
+16) [A,B,C] -> remove(1) -> [A,C]
+17) [A,B,C] -> remove(2) -> [A,B]
+18) [A,B,C] -> set(0,D) -> [D,B,C]
+19) [A,B,C] -> set(1,D) -> [A,D,C]
+20) [A,B,C] -> set(2,D) -> [A,B,D]
+
+including Iterator remove() method, add the following:
+1) [A] -> iterator remove() after next() returns A -> []
+2) [A,B] -> iterator remove() after next() returns A -> [B]
+3) [A,B] -> iterator remove() after next() returns B -> [A]
+4) [A,B,C] -> iterator remove() after next() returns A -> [B,C]
+5) [A,B,C] -> iterator remove() after next() returns B -> [A,C]
+6) [A,B,C] -> iterator remove() after next() returns C -> [A,B]
+ 
+including ListIterator with remove(), add(), and set() methods:
+1-6) same as Iterator remove() after next() scenarios above
+7) [A] -> iterator remove() after previous() returns A -> []
+8) [A,B] -> iterator remove() after previous() returns A -> [B]
+9) [A,B] -> iterator remove() after previous() returns B -> [A]
+10) [A,B,C] -> iterator remove() after previous() returns A -> [B,C]
+11) [A,B,C] -> iterator remove() after previous() returns B -> [A,C]
+12) [A,B,C] -> iterator remove() after previous() returns C -> [A,B]
+13) [] -> iterator add(A) -> [A]
+14) [A] -> iterator add(B) with new iterator -> [B,A]
+15) [A] -> iterator add(B) after next() returns A -> [A,B]
+16) [A] -> iterator add(A) after previous() returns A -> [B,A]
+17) [A,B] -> iterator add(C) with new iterator -> [C,A,B]
+18) [A,B] -> iterator add(C) after next() returns A -> [A,C,B]
+19) [A,B] -> iterator add(C) after next() returns B -> [A,B,C]
+20) [A,B] -> iterator add(C) after previous() returns A -> [C,A,B]
+21) [A,B] -> iterator add(C) after previous() returns B -> [A,C,B]
+22) [A] -> iterator set(B) after next() returns A -> [B]
+23) [A] -> iterator set(B) after previous() returns A -> [B]
+24) [A,B] -> iterator set(C) after next() returns A -> [C,B]
+25) [A,B] -> iterator set(C) after next() returns B -> [A,C]
+26) [A,B] -> iterator set(C) after previous() returns A -> [C,B]
+27) [A,B] -> iterator set(C) after previous() returns B -> [A,C]
+28) [A,B,C] -> iterator set(D) after next() returns A -> [D,B,C]
+29) [A,B,C] -> iterator set(D) after next() returns B -> [A,D,C]
+30) [A,B,C] -> iterator set(D) after next() returns C -> [A,B,D]
+31) [A,B,C] -> iterator set(D) after previous() returns A -> [D,B,C]
+32) [A,B,C] -> iterator set(D) after previous() returns B -> [A,D,C]
+33) [A,B,C] -> iterator set(D) after previous() returns C -> [A,B,D]
+ 
+ArrayList/SLL (UnorderedListADT and IndexedListADT) with fully-implemented Iterator: 48+ scenarios
+DLL with fully-implemented ListIterator: 75+ scenarios
+ 
+An example of one test scenario for a DoubleLinkedList:
+  Add a new element to the front of a list containing one element.
+  Starting state: [A]
+  Change: Call addToFront(B)
+  Resulting state: [B, A]
+  Tests:
+    removeFirst() returns B
+    removeLast() returns A
+    remove(A) returns A
+    remove(B) returns B
+    remove(C) throws ElementNotFoundException
+    first() returns B
+    last() returns A
+    contains(A) returns true
+    contains(B) returns true
+    contains(C) returns false
+    isEmpty() returns false
+    size() returns 2
+    iterator() returns an Iterator reference
+    toString() returns "[B, A]"
+    addToFront(C) throws no Exceptions
+    addToRear(C) throws no Exceptions
+    addAfter(C, B) throws no Exceptions
+    addAfter(C, A) throws no Exceptions
+    addAfter(C, D) throws ElementNotFoundException
+    add(-1, C) throws IndexOutOfBoundsException
+    add(0, C) throws no Exceptions
+    add(1, C) throws no Exceptions
+    add(2, C) throws no Exceptions
+    add(3, C) throws IndexOutOfBoundsException
+    set(-1, C) throws IndexOutOfBoundsException
+    set(0, C) throws no Exceptions
+    set(1, C) throws no Exceptions
+    set(2, C) throws IndexOutOfBoundsException
+    add(C) throws no Exceptions
+    get(-1) throws IndexOutOfBoundsException
+    get(0) returns B
+    get(1) returns A
+    get(2) throws IndexOutOfBoundsException
+    indexOf(A) returns 1
+    indexOf(B) returns 0
+    indexOf(C) returns -1
+    remove(-1) throws IndexOutOfBoundsException
+    remove(0) returns B
+    remove(1) returns A
+    remove(2) throws IndexOutOfBoundsException
+    Iterator test 1
+      iterator hasNext() returns true
+      iterator next() returns B
+      iterator hasNext() returns true
+      iterator next() returns A
+      iterator hasNext() returns false
+      iterator next() throws NoSuchElementException
+    Iterator tests 2-10
+      iterator() returns Iterator reference
+      change the list with an Unordered or IndexedListADT method
+      iterator hasNext() throws ConcurrentModificationException
+    Iterator test 11
+      iterator() returns Iterator reference
+      iterator next() returns B
+      iterator remove() throws no Exeptions
+      size() returns 1
+      iterator hasNext() returns true
+      iterator next() returns A
+      first() returns A
+    Iterator test 12
+      iterator() returns Iterator reference
+      iterator next() returns B
+      iterator next() returns A
+      iterator remove() throws no Exceptions
+      size() returns 1
+      iterator hasNext() returns false
+      last() returns B
+    Iterator tests 13-15
+      create iterator 1 and 2
+      it1 next() returns B
+      it2 next() returns B
+      it1 remove() throws no Exceptions
+      size() returns 1
+      it2 hasNext(), next(), or remove() throws ConcurrentModificationException
+      it1 next() returns A
+    Iterator test 16
+      iterator remove() throws IllegalStateException
+    Iterator test 17
+      iterator next() returns B
+      iterator remove() throws no Exceptions
+      size() returns 1
+      iterator remove() throws IllegalStateException
+    ListIterator test 0
+      listIterator() returns ListIterator reference
+    ListIterator test 1-17
+      repeat all basic Iterator tests, but use ListIterators instead of Iterators
+    ListIterator test 18
+      hasPrevious() returns false
+      previous() throws NoSuchElementException
+    ListIterator test 19
+      next() returns B
+      hasPrevious() returns true
+      previous() returns B
+      hasPrevious() returns false
+      hasNext() returns true
+    ListIterator test 20
+      listIterator(0) returns ListIterator reference
+      hasPrevious() returns false
+      previousIndex() returns -1
+      nextIndex() returns 0
+      next() returns B
+    ListIterator test 21
+      listIterator(1) returns ListIterator reference
+      previousIndex() returns 0
+      hasPrevious() returns true
+      previous() returns B
+    ListIterator test 22
+      listIterator(1) returns ListIterator reference
+      nextIndex() returns 1
+      hasNext() returns true
+      next() returns A
+    ListIterator test 23
+      listIterator(2) returns ListIterator reference
+      hasNext() returns false
+      nextIndex() returns 2
+      previousIndex() returns 1
+      hasPrevious() returns true
+      previous() returns A
+    ListIterator test 24
+      listIterator(3) throws IndexOutOfBoundsException
+    ListIterator test 25
+      listIterator(-1) throws IndexOutOfBoundsException
+    ListIterator tests 26-30
+      ListIterator set(C) throws IllegalStateException after any ListIterator constructor
+    ListIterator test 31
+      next() returns B
+      set(C) throws no Exceptions
+      first() returns C
+    ListIterator test 32
+      next() returns B
+      previous() returns B
+      set(C) throws no Exceptions
+      first() returns C
+    ListIterator test 33
+      next() returns B
+      next() returns A
+      set(C) throws no Exceptions
+      last() returns C
+    ListIterator test 34
+      next() returns B
+      next() returns A
+      previous() returns A
+      set(C) throws no Exceptions
+      last() returns C
+    ListIterator test 35
+      new listIterator()
+      ListIterator's add(C) throws no Exceptions
+      size() returns 3
+      first() returns C
+      hasNext() returns true
+      hasPrevious() returns true
+      previous() returns C
+      next() returns C
+      next() returns B
+      next() returns A
+    ListIterator test 36
+      new listIterator()
+      next() returns B
+      ListIterator's add(C) throws no Exceptions
+      size() returns 3
+      first() returns B
+      last() returns A
+      hasNext() returns true
+      hasPrevious() returns true
+      next() returns A
+      previous() returns A
+      previous() returns C
+      previous() returns B
+   ListIterator test 37
+      new listIterator()
+      next() returns B
+      next() returns A
+      ListIterator's add(C) throws no Exceptions
+      size() returns 3
+      hasNext() returns false
+      hasPrevious() returns true
+      last() returns C
+      previous() returns C
+   ListIterator tests 38-40
+      new listIterator(0), listIterator(1), listIterator(2)
+      ListIterator add(C)
+      confirm insertion at ListIterator's initialized index
+   ListIterator tests 41-49
+      two ListIterators, lit1 and lit2
+      lit1.add(C)
+      lit2.any method throws ConcurrentModificationException
+   ListIterator tests 50-58
+      two ListIterators, lit1 and lit2
+      lit1.next()
+      lit1.set(C)
+      lit2.any method throws ConcurrentModificationException
+  and more...
+
+  ~120 tests x 75 scenarios -> 9000 tests
+  probably won't exaustively test (just a hunch) so consider thoroughly testing
+  Unordered and Indexed scenarios that result in zero and one-element lists and
+  testing ListIterator thoroughly for one scenario beginning with a two-element
+  list
+  from there, be very selective about scenarios/tests that you believe will tell
+  you valuable information
+

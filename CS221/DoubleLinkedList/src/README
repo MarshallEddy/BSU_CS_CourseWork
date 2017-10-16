@@ -1,0 +1,120 @@
+*************************************************************************
+* DLL/Double Linked List
+* CS221-003
+* 11/14/15
+* Marshall Eddy
+*************************************************************************
+
+OVERVIEW:
+
+A doubly linked list with full implementation of the DoubleLinkedListADT
+interface and a fully functional iterator that implements the ListIterator
+interface. There is also a test class to ensure correct functionality of 
+the classes.
+
+INCLUDED FILES:
+
+ List the files required for the project with a brief
+ explanation of why each is included.
+
+ * DoubleLinkedList.java - source file
+ * ListTester.java - test file
+ * LinearNode.java - object class
+ * DoubleLinkedListADT.java - interface
+ * ElementNotFoundException.java - exception
+ * EmptyCollectionException.java - exception
+ * IndexedListADT.java - interface
+ * IndexedUnorderedListADT.java - interface
+ * ListADT.java - interface
+ * UnorderedListADT.java - interface
+ * README - this file
+
+
+COMPILING AND RUNNING:
+ 
+ These are command-line instructions for a system like onyx.
+ They have nothing to do with Eclipse or any other IDE.
+ 
+ From the directory containing all source files, compile the
+ driver class (and all dependencies) with the command:
+ $ javac ListTester.java
+
+ Run the compiled class file with the command:
+ $ java ListTester
+
+ Console output will give the results after the program finishes.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+ In the DoubleLinkedList class, it starts off with all linked list 
+ methods (non-iterator) and then goes in to iterator() and listIterator()
+ constructors. Next, you'll find the ListIterator class below it, this
+ includes all of the ListIterator methods as defined in the java API.
+ 
+ The other class used in this program is the ListTester class. This is fairly
+ self-explanatory, but it has various different tests used to ensure the
+ correctness of the methods in the DoubleLinkedList. The ListTester class starts
+ with the set up for the tests and then the tests separated by each scenario
+ and after all the tests, there is all the tester methods used in the tests.
+
+
+TESTING:
+
+ In this program there is a ListTester class used to test different
+ methods in the DoubleLinkedList class, as well as the ListIterator
+ class. Unfortunately there is a large amount of possible tests, so
+ I could only test a few scenarios. However, I attempted to test the
+ things that matter. In addition to this, I wrote a couple extra tester
+ methods so I could see how each method was working with out using the
+ debugger. This helped save time testing and made it easier to fix simple
+ bugs, the more complicated ones I use the debugger. I would say this is
+ idiot-proof because you would have to be smart to even use the methods 
+ and if you are not smart, then you won't be able to do anything to mess it 
+ up. I'm fairly confident in saying that all non-iterator related methods
+ are 100% working. However, I am still working on, or just can't seem to
+ figure out, the correct implementation of the remove(), add(), and for 
+ some reason, I'm having issues with the previous() method when using the
+ remove() method. (iteratorRemove_afterPrevious)
+
+
+DISCUSSION:
+ 
+ Initially I had thought that adding in the hasPrevious() and previous()
+ would be simple, all I would have to do is the opposite of hasNext()
+ and next(). I was terribly mistaken. I had initially had a variable last
+ (as the previous() version of current for next()), which not right at all.
+ Because of that, I had a hard time thinking about how previous() would
+ actually be implemented, since I had this whole "last" idea in my head.
+ I eventually looked it up and saw that someone had done the same thing, 
+ and everyone on the forum was "yelling" at them. So I eventually found 
+ the correct implementation of previous and went on my way.
+ 
+ I kept getting null pointers for the majority of my remove() tests.
+ I eventually realized they were due to my incorrect implementation of
+ previous() and hasPrevious(). All I had to do was add in an if-statement
+ to confirm there was a previous element in the list.
+ 
+ Most of my issues came from the ListIterator methods, and the main reason
+ for those issues was that I was reading what the methods were suppose to do
+ and interpreting them horribly. After staring at the documentation for hours,
+ and trying several different implementations, I finally realized I was just
+ reading it wrong.
+ 
+ When creating the constructor for the ListIterator that took in a starting
+ index, I initially did it incorrectly. I had the right idea, but executed
+ it incorrectly. It used a for loop that looped from 0-the given index, and
+ each time I was using setNext()/setPrevious() or getNext()/getPrevious().
+ I realized this was wrong when it would give me an infinite loop when trying 
+ to execute certain methods. When in the debugger, I noticed that when a ListIterator
+ was created with a starting index, there would be an infinite amount of "next"s and
+ "previous"s all with the same value as the original element at that node (mainly current).
+ So I fixed it by creating a normal iterator and each time it looped through it executed
+ the line "iterator.next()". This seems to have solved the issue.
+ 
+ Nothing can ever compare to the difficulty I had with the DoubleLinkedList
+ ListIterator methods. I hope to never experience the amount of NullPointer
+ Exceptions in the future compared to amount I received when attempting to
+ implement each of the methods. However, I assume it can only get worse.
+ Iterators are crazy.
+ 
